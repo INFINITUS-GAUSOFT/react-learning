@@ -1,15 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { SupabaseContextProvider } from './context/SupabaseContext';
+import { createClient } from '@supabase/supabase-js';
+
+import './index.css';
+import Product from './pages/Product';
+
+const queryClient = new QueryClient()
+
+const supabase = createClient(`${process.env.REACT_APP_SUPABASE_URL}`, `${process.env.REACT_APP_SUPABASE_KEY}`);
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    // errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/products/:id",
+        element: <Product />,
+        errorElement: <h2>Product not found</h2>,
+      }
+    ]
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient} contextSharing={true}>
+      <SupabaseContextProvider client={supabase}>
+        <RouterProvider router={router} />
+      </SupabaseContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
