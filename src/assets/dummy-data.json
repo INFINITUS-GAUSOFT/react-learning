@@ -1,0 +1,32 @@
+[
+    {
+      "done": false,
+      "text": "Get a job",
+      "createdAt": "2023-07-24T12:00:00.000Z",
+      "id": "1"
+    },
+    {
+      "done": false,
+      "text": "Study typescript",
+      "createdAt": "2023-07-24T12:00:01.000Z",
+      "id": "2"
+    },
+    {
+      "done": false,
+      "text": "Pet the cat",
+      "createdAt": "2023-07-24T12:00:02.000Z",
+      "id": "3"
+    },
+    {
+      "done": false,
+      "text": "Pet the dog",
+      "createdAt": "2023-07-24T12:00:03.000Z",
+      "id": "4"
+    },
+    {
+      "done": true,
+      "text": "What da dog do'in?",
+      "createdAt": "2023-07-24T12:00:04.000Z",
+      "id": "5"
+    }
+  ]
