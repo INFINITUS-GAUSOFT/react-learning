@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, List, ListItem, ListItemText, Paper, Rating, Stack, TextField, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, CircularProgress, Rating, Stack, TextField, Typography } from "@mui/material";
 import { useSupabase } from "../hooks/useSupabase";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -7,14 +7,18 @@ export default function ProductList() {
     const supabase = useSupabase();
 
     const { data, isLoading } = useQuery("products", async () => {
-        const { data } = await supabase.from("products").select("*");
+        const { data } = await supabase.from("products").select("*, reviews(count)");
         return data;
     });
 
     if (isLoading) {
-        return <div>Chargement...</div>;
+        return (
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <CircularProgress />
+            </div>
+        );
     }
-
+    
     if (!data) {
         return <div>Erreur lors du chargement des produits.</div>;
     }
@@ -22,13 +26,13 @@ export default function ProductList() {
     return (
         <Stack spacing={4}>
             <Typography variant='h6' textAlign='center'>
-                Ecommerce
+                Liste de produits
             </Typography>
             <Box sx={{ mx: '1em', mt: '1em' }}>
                 <TextField fullWidth label='Rechercher...' />
             </Box>
             {data.map((product) => (
-                <Link to={`/products/${product.id}`} key={product.id} style={{ textDecoration: 'none'}}>
+                <Link to={`/products/${product.id}`} key={product.id} style={{ textDecoration: 'none' }}>
                     <Card sx={{ display: 'flex', textDecoration: 'none' }}>
                         <CardMedia
                             component="img"
@@ -48,7 +52,12 @@ export default function ProductList() {
                                     {product.price} €
                                 </Typography>
                             </Stack>
-                            <Rating name="product-rating" size="small" value={2} readOnly />
+                            <Stack direction="row" spacing={1}>
+                                <Rating name="product-rating" size="small" value={2} readOnly />
+                                <Typography variant="body2" color="text.secondary">
+                                    {product.reviews[0].count} avis
+                                </Typography>
+                            </Stack>
                         </CardContent>
                     </Card>
                 </Link>

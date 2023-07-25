@@ -12,7 +12,8 @@ import { SupabaseContextProvider } from './context/SupabaseContext';
 import { createClient } from '@supabase/supabase-js';
 
 import './index.css';
-import Product from './pages/Product';
+import ProductDetails from './pages/Product';
+import ProductList from './components/ProductList';
 
 const queryClient = new QueryClient()
 
@@ -22,11 +23,16 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
+    errorElement: <h2>Page not found</h2>,
     children: [
       {
-        path: "/products/:id",
-        element: <Product />,
+        path: "products/:id",
+        element: <ProductDetails />,
+        errorElement: <h2>Product not found</h2>,
+      },
+      {
+        path: "/",
+        element: <ProductList />,
         errorElement: <h2>Product not found</h2>,
       }
     ]

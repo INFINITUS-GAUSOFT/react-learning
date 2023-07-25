@@ -24,14 +24,14 @@ export const SupabaseContextProvider: FunctionComponent<{ children: React.ReactN
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const { data: { user } } = await client.auth.getUser();
-                setUser(user);
-            } catch (error) {
-                // Handle error
-            }
-        };
+        // const fetchUser = async () => {
+        //     try {
+        //         const { data: { user } } = await client.auth.getUser();
+        //         setUser(user);
+        //     } catch (error) {
+        //         // Handle error
+        //     }
+        // };
         // fetchUser();
         const { data: listener } = client.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN') {

@@ -10,8 +10,18 @@ export interface Product {
     name: string
     image: string
     description: string
-    price: number
+    price: number,
+    reviews: Review[]
 }
+
+export interface Review {
+    id: number
+    note: number
+    comment: string,
+    created_at: string
+}
+
+export type CreateReview = Pick<Review, "note" | "comment"> & { product_id: number };
 
 export interface Country {
     id: number

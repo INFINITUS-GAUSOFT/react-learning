@@ -1,10 +1,7 @@
 import '@fontsource-variable/manrope';
-import { CircularProgress, Container, ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material';
+import RootLayout from './layouts/RootLayout';
 import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useSupabase } from './hooks/useSupabase';
-import ProductList from './components/ProductList';
-
 
 const theme = createTheme({
   palette: {
@@ -44,33 +41,13 @@ const theme = createTheme({
 // });
 
 function App() {
-  const supabase = useSupabase();
-  // const { data: countries, isLoading } = useQuery("countries", getCountries);
-
-
   useEffect(() => {
     document.title = 'Todo List';
   }, [])
 
-  // async function getCountries() {
-  //   const { data } = await supabase.from("countries").select();
-  //   return data;
-  // }
-
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Container sx={{ py: '2em' }} maxWidth='xs'>
-          {/* <TodoList initialData={initialData} /> */}
-          <ProductList />
-          {/* {isLoading ? <CircularProgress /> : (
-            <ul>
-              {countries?.map((country) => (
-                <li key={country.name}>{country.name}</li>
-              ))}
-            </ul>)} */}
-        </Container>
-      </div>
+      <RootLayout />
     </ThemeProvider>
   );
 }
