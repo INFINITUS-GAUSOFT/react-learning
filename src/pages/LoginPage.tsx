@@ -1,4 +1,19 @@
-import { Alert, Avatar, Box, Button, Checkbox, Collapse, Container, CssBaseline, FormControlLabel, Grid, IconButton, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Avatar,
+  Box,
+  Button,
+  Checkbox,
+  Collapse,
+  Container,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Link,
+  TextField,
+  Typography
+} from "@mui/material";
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useSupabase } from "../hooks/useSupabase";
