@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/buildserve -s build -l 4000
+/build
 
 # misc
 .DS_Store

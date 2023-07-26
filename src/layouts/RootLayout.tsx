@@ -20,7 +20,8 @@ export default function RootLayout() {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 <Button color="inherit" sx={{ textTransform: 'none'}} href="/">Ecommerce</Button>
               </Typography>
-              <Button color="inherit">Login</Button>
+              <Button color="inherit" variant="outlined" href="/login">Login</Button>
+              <Button color="inherit" href="/register">Register</Button>
             </Toolbar>
           </AppBar>
         </Box>

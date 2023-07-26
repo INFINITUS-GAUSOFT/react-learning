@@ -27,3 +27,15 @@ export interface Country {
     id: number
     name: string
 }
+
+export interface UserData {
+    email: string
+    firstname: string
+    lastname: string
+    password: string
+}
+
+export interface Credentials {
+    email: string
+    password: string
+}

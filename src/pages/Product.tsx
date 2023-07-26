@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useSupabase } from "../hooks/useSupabase";
 import { Alert, Box, Button, CircularProgress, Paper, Rating, Stack, TextareaAutosize, Typography, styled } from "@mui/material";
@@ -25,6 +25,7 @@ const StyledTextarea = styled(TextareaAutosize)(
 export default function ProductDetails() {
     const { id } = useParams();
     const supabase = useSupabase();
+    const navigate = useNavigate();
 
     const [comment, setComment] = useState("");
     const [note, setNote] = useState<number | null>(0);
@@ -36,9 +37,12 @@ export default function ProductDetails() {
 
         if (error) {
             console.error(error);
+            return error;
         } else {
             window.location.reload();
             console.log("Review inserted successfully:", response);
+
+            return response;
         }
     });
 
@@ -55,6 +59,13 @@ export default function ProductDetails() {
         if (note && comment) {
 
             if (!id) throw new Error("Product not found");
+
+
+            const { data } = await supabase.auth.getSession();
+
+            if(!data) {
+                navigate("/login");
+            }
 
             const reviewData: CreateReview = {
                 product_id: Number.parseInt(id),

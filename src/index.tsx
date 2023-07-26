@@ -14,6 +14,8 @@ import { createClient } from '@supabase/supabase-js';
 import './index.css';
 import ProductDetails from './pages/Product';
 import ProductList from './components/ProductList';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 const queryClient = new QueryClient()
 
@@ -26,14 +28,20 @@ const router = createBrowserRouter([
     errorElement: <h2>Page not found</h2>,
     children: [
       {
-        path: "products/:id",
-        element: <ProductDetails />,
-        errorElement: <h2>Product not found</h2>,
-      },
-      {
         path: "/",
         element: <ProductList />,
-        errorElement: <h2>Product not found</h2>,
+      },
+      {
+        path: "products/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
       }
     ]
   },

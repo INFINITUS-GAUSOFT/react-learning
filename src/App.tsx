@@ -42,7 +42,7 @@ const theme = createTheme({
 
 function App() {
   useEffect(() => {
-    document.title = 'Todo List';
+    document.title = 'Ecommerce';
   }, [])
 
   return (
